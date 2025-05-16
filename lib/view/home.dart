@@ -32,25 +32,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-    
-      body: PageView.builder(
-          controller: PageController(initialPage: 0),
-          scrollDirection: Axis.vertical,
-          onPageChanged: (value) {
-            setState(() {
-              isLoading = true;
-            });
-            GetNews();
-          },
-          itemBuilder: (context, index) {
-            return isLoading ? const Center(child: CircularProgressIndicator(),) : NewsContainer(
-                imgUrl: newsArt.imgUrl,
-                newsCnt: newsArt.newsCnt,
-                newsHead: newsArt.newsHead,
-                newsDes: newsArt.newsDes,
-                newsUrl: newsArt.newsUrl);
-          }),
+      body: SafeArea(
+        child: PageView.builder(
+            controller: PageController(initialPage: 0),
+            scrollDirection: Axis.vertical,
+            onPageChanged: (value) {
+              setState(() {
+                isLoading = true;
+              });
+              GetNews();
+            },
+            itemBuilder: (context, index) {
+              return isLoading
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : NewsContainer(
+                      imgUrl: newsArt.imgUrl,
+                      newsCnt: newsArt.newsCnt,
+                      newsHead: newsArt.newsHead,
+                      newsDes: newsArt.newsDes,
+                      newsUrl: newsArt.newsUrl);
+            }),
+      ),
     );
   }
 }
